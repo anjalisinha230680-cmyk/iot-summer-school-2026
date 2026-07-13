@@ -1,0 +1,26 @@
+# Arduino Pin Types
+## Digital input 
+In the INPUT state, the pin reads a voltage - signal LOW (0V) or HIGH (5V).
+Example: A push button connected to pin D2
+IoT Use Case : Detecting whether a smart doorbell button has been pressed.
+## Digital Output 
+In the OUTPUT state, the microcontroller generates a logic signal, controlling e.g. an LED, relay or communication module.
+Example: An LED connected to pin D13.
+IoT Use Case: Turning lights on or off in a smart home system.
+## Analog input 
+Measures varying voltages from 0V to 5V.
+Example: A potentiometer connected to A0.
+IoT Use Case: Measuring soil moisture levels for automatic irrigation.
+## PWM Output
+Produces a pulse-width-modulated signal to control brightness or speed.
+Example: LED connected to D9.
+IoT Use Case: Adjusting the speed of a ventilation fan based on temperature.
+## I2C and SPI Communication Pins
+I2C (Inter-Integrated Circuit)
+Pins: SDA (A4), SCL (A5)
+Example Device: OLED Display (SSD1306) or DHT12 Sensor
+Real IoT Use Case: Displaying temperature and humidity readings from a sensor on an OLED screen in a smart weather monitoring system.
+SPI (Serial Peripheral Interface)
+Pins: D10 (SS), D11 (MOSI), D12 (MISO), D13 (SCK)
+Example Device: SD Card Module or RFID Reader (MFRC522)
+Real IoT Use Case: Storing sensor data on an SD card or reading RFID tags for a smart access control system.
