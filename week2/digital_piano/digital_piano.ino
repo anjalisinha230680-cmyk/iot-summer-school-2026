@@ -12,15 +12,19 @@ void setup(){
   pinMode(btn4,INPUT_PULLUP);
 }
 void loop(){
+  
   if(digitalRead(btn1)==LOW)
     tone(buzzer,262);
-   else if(digitalRead(btn2)==LOW)
+   
+  else if(digitalRead(btn2)==LOW)
     tone(buzzer,294);
-   else if(digitalRead(btn3)==LOW)
+  
+  else if(digitalRead(btn3)==LOW)
     tone(buzzer,330);
-   else if(digitalRead(btn4)==LOW)
+   
+  else if(digitalRead(btn4)==LOW)
     tone(buzzer,394);
      
-     else
+  else
      noTone(buzzer);
      }
