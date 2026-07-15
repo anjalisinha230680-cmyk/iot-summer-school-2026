@@ -12,8 +12,19 @@ void setup(){
   pinMode(btn4,INPUT_PULLUP);
 }
 void loop(){
-  
+  int pressed = 0;
   if(digitalRead(btn1)==LOW)
+    pressed++;
+  if(digitalRead(btn2)==LOW)
+    pressed++;
+  if(digitalRead(btn3)==LOW)
+    pressed++;
+  if(digitalRead(btn4)==LOW)
+    pressed++;
+  if( pressed >= 2)
+    tone(buzzer,392);
+  
+  else if(digitalRead(btn1)==LOW)
     tone(buzzer,262);
    
   else if(digitalRead(btn2)==LOW)
