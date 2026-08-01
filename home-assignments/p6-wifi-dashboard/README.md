@@ -59,7 +59,7 @@ The dashboard displays real-time temperature, humidity, atmospheric pressure, al
 * **IP Address Structure**: `http://192.168.X.X/`
 * **JSON Endpoint**: `http://192.168.X.X/data`
 
----
+
 
 ##  Served HTML Source Code Structure
 
@@ -90,5 +90,5 @@ The dashboard displays real-time temperature, humidity, atmospheric pressure, al
   </div>
 </body>
 </html>
-```
+
 
