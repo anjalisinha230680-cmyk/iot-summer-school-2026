@@ -1,0 +1,81 @@
+ Power Rails
+Connect the ESP32 to the breadboard power rails:
+ESP32 3.3V  ─────► Breadboard + (Red Rail)
+
+ESP32 GND   ─────► Breadboard - (Blue Rail)
+For the servo, relay, and ULN2003 stepper driver, use the ESP32 5V/VIN pin:
+ESP32 5V/VIN ───► Separate + Rail (or directly to these modules)
+
+ESP32 GND ──────► Same GND rail
+  OLED
+OLED VCC  → +3.3V rail
+OLED GND  → GND rail
+OLED SDA  → GPIO21
+OLED SCL  → GPIO22
+ DHT11
+VCC  → +3.3V rail
+GND  → GND rail
+DATA → GPIO4
+ Flame Sensor
+VCC → +3.3V rail
+GND → GND rail
+DO  → GPIO5
+ LDR Module
+VCC → +3.3V rail
+GND → GND rail
+DO  → GPIO13
+ Touch Sensor
+VCC → +3.3V rail
+GND → GND rail
+S   → GPIO15
+ Reed Switch
+VCC → +3.3V rail
+GND → GND rail
+S   → GPIO19
+ Knock (Shock) Sensor
+VCC → +3.3V rail
+GND → GND rail
+DO  → GPIO32
+ Voice Sensor
+VCC → +3.3V rail
+GND → GND rail
+DO  → GPIO33
+Tracking Sensor
+VCC → +3.3V rail
+GND → GND rail
+OUT → GPIO34
+RGB LED Module
+VCC → +3.3V rail
+GND → GND rail
+R   → GPIO26
+G   → GPIO14
+B   → GPIO12
+ Active Buzzer
++ → GPIO25
+
+- → GND rail
+Relay
+VCC → 5V
+
+GND → GND
+
+IN → GPIO27
+ Servo
+Brown → GND
+
+Red → 5V
+
+Orange → GPIO18
+Stepper Motor + ULN2003
+ULN2003 Driver
+VCC → 5V
+
+GND → GND
+
+IN1 → GPIO16
+
+IN2 → GPIO17
+
+IN3 → GPIO2
+
+IN4 → GPIO0
