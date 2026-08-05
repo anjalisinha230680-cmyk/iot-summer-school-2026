@@ -1,14 +1,14 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <Adafruit_BMP280.h>
+#include <Adafruit_BMP085.h>
 
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET    -1
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-Adafruit_BMP280 bmp; 
+Adafruit_BMP085 bmp; 
 
 
 #define POT_PIN        34  
@@ -71,13 +71,6 @@ void setup() {
       for (;;);
     }
   }
-
-  
-  bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,     
-                  Adafruit_BMP280::SAMPLING_X2,     
-                  Adafruit_BMP280::SAMPLING_X16,    
-                  Adafruit_BMP280::FILTER_X16,      
-                  Adafruit_BMP280::STANDBY_MS_500);
 
   for (int i = 0; i < LOG_SIZE; i++) {
     pressureLog[i] = 0.0;
@@ -244,4 +237,3 @@ void printSerialTable(float tempC, float pressurehPa, float seaLevelhPa, float b
   
   Serial.println(F("===============================================================\n"));
 }
-  
