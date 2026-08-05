@@ -29,9 +29,11 @@ const unsigned long DISPLAY_TOGGLE_INTERVAL = 5000;
 
 int currentPage = 1;
 
-enum Trend { STABLE, RISING, FALLING };
-Trend currentTrend = STABLE;
-
+enum Trend 
+{ TREND_STABLE,
+ TREND_RISING, 
+ TREND_FALLING };
+ Trend currentTrend = TREND_STABLE;
 
 float getSeaLevelPressure(float rawPressurePa, float localAltitudeMeters);
 void updateTrend();
@@ -119,9 +121,9 @@ void loop() {
   float currentBaselineAlt = map(potVal, 0, 4095, 0, 2000);
   float rawPressPa = bmp.readPressure();
   float seaLevelPa = getSeaLevelPressure(rawPressPa, currentBaselineAlt);
-
+  float actualAltitude = bmp.readAltitude(seaLevelPa/100.0F);
   if (currentPage == 1) {
-    displayPage1(bmp.readTemperature(), rawPressPa / 100.0F, seaLevelPa / 100.0F, currentBaselineAlt);
+    displayPage1(bmp.readTemperature(), rawPressPa / 100.0F, seaLevelPa / 100.0F, actualAltitude);
   } else {
     displayPage2(currentBaselineAlt);
   }
@@ -134,7 +136,7 @@ float getSeaLevelPressure(float rawPressurePa, float localAltitudeMeters) {
 
 void updateTrend() {
   if (logIndex < 2) {
-    currentTrend = STABLE;
+    currentTrend = TREND_STABLE;
     return;
   }
 
@@ -150,16 +152,16 @@ void updateTrend() {
   float diff = newest - oldest; // Difference in Pascals
 
   if (diff > 50.0) {
-    currentTrend = RISING;
+    currentTrend = TREND_RISING;
   } else if (diff < -50.0) {
-    currentTrend = FALLING;
+    currentTrend = TREND_FALLING;
   } else {
-    currentTrend = STABLE;
+    currentTrend = TREND_STABLE;
   }
 }
 
 void updateLEDs() {
-  if (currentTrend == FALLING) {
+  if (currentTrend == TREND_FALLING) {
     digitalWrite(RED_LED_PIN, HIGH);
     digitalWrite(GREEN_LED_PIN, LOW);
   } else { // RISING or STABLE
@@ -168,7 +170,7 @@ void updateLEDs() {
   }
 }
 
-void displayPage1(float tempC, float pressurehPa, float seaLevelhPa, float baselineAlt) {
+void displayPage1(float tempC, float pressurehPa, float seaLevelhPa, float actualAltitude) {
   display.clearDisplay();
   display.setTextSize(1);
   display.setCursor(0, 0);
@@ -184,7 +186,7 @@ void displayPage1(float tempC, float pressurehPa, float seaLevelhPa, float basel
   display.print(F("Sea-Lvl P:")); display.print(seaLevelhPa, 1); display.println(F(" hPa"));
 
   display.setCursor(0, 52);
-  display.print(F("Base Alt: ")); display.print((int)baselineAlt); display.println(F(" m"));
+  display.print(F("Altitude: ")); display.print( actualAltitude,1); display.println(F(" m"));
   
   display.display();
 }
@@ -201,12 +203,12 @@ void displayPage2(float baselineAlt) {
   display.setTextSize(2);
   display.setCursor(10, 32);
   
-  if (currentTrend == RISING) {
+  if (currentTrend == TREND_RISING) {
     display.println(F("[ ^ ] RISING"));
     display.setTextSize(1);
     display.setCursor(0, 52);
     display.println(F("Forecast: Good Weather"));
-  } else if (currentTrend == FALLING) {
+  } else if (currentTrend == TREND_FALLING) {
     display.println(F("[ v ] FALLING"));
     display.setTextSize(1);
     display.setCursor(0, 52);
@@ -236,9 +238,10 @@ void printSerialTable(float tempC, float pressurehPa, float seaLevelhPa, float b
   if(baselineAlt < 100) Serial.print(" ");
   Serial.print(F("  | "));
   
-  if (currentTrend == RISING) Serial.println(F("RISING |"));
-  else if (currentTrend == FALLING) Serial.println(F("FALLING|"));
+  if (currentTrend == TREND_RISING) Serial.println(F("RISING |"));
+  else if (currentTrend == TREND_FALLING) Serial.println(F("FALLING|"));
   else Serial.println(F("STABLE |"));
   
   Serial.println(F("===============================================================\n"));
 }
+  
