@@ -7,8 +7,8 @@
 #include <DHTesp.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
 
 #define DHT_PIN 4
 #define LDR_PIN 34
